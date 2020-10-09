@@ -87,7 +87,7 @@ while [[ $# -gt 0 ]]
 do
     case "$1" in
         *:* )
-        WAITFORIT_hostport=(${1//:/ })
+        WAITFORIT_hostport=("${1//:/ }")
         I=$((I + 1))
         WAITFORIT_HOSTS[I]=${WAITFORIT_hostport[0]}
         WAITFORIT_PORTS[I]=${WAITFORIT_hostport[1]}
@@ -196,7 +196,7 @@ for i in "${!WAITFORIT_HOSTS[@]}"; do
     fi
 done
 
-if [[ "$WAITFORIT_CLI" != "" ]]; then
+if [[ "${WAITFORIT_CLI[*]}" != "" ]]; then
     if [[ $WAITFORIT_RESULT -ne 0 && $WAITFORIT_STRICT -eq 1 ]]; then
         echoerr "$WAITFORIT_cmdname: strict mode, refusing to execute subprocess"
         exit $WAITFORIT_RESULT
