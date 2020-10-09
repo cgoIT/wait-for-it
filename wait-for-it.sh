@@ -64,10 +64,10 @@ wait_for_wrapper()
 {
     # In order to support SIGINT during timeout: http://unix.stackexchange.com/a/57692
     if [[ $WAITFORIT_QUIET -eq 1 ]]; then
-        # shellcheck disable=SC2806
+        # shellcheck disable=SC2086
         timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT "$0" --quiet --child --host="$WAITFORIT_HOST"--port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
     else
-        # shellcheck disable=SC2806
+        # shellcheck disable=SC2086
         timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT "$0" --child --host="$WAITFORIT_HOST" --port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
     fi
     WAITFORIT_PID=$!
