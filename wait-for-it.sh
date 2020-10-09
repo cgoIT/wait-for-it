@@ -5,6 +5,13 @@ WAITFORIT_cmdname=${0##*/}
 
 echoerr() { if [[ $WAITFORIT_QUIET -ne 1 ]]; then echo "$@" 1>&2; fi }
 
+# Added for mac compatibility.
+unameOS="$(uname -s)"
+if [[ "$unameOS" == "Darwin" ]]; then
+    function timeout() { perl -e 'alarm shift; exec @ARGV' "$@"; }
+    function realpath() { [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"; }
+fi
+
 usage()
 {
     [[ $1 ]] && out=2 || out=1
