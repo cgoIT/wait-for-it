@@ -38,9 +38,6 @@ class TestWaitForIt(unittest.TestCase):
         command = self.wait_script + " " + args
         exitcode, out, err = self.execute(command)
 
-        print("err: " + err)
-        print("out: " + out)
-
         # Check stderr
         msg = ("Failed check that STDERR:\n" +
                DIVIDE_LINE + "\n" + err + "\n" + DIVIDE_LINE +
