@@ -6,5 +6,6 @@ python:
   - "3.8"
 
 script:
+  - shellcheck *.sh
   - python test/wait-for-it.py
 
