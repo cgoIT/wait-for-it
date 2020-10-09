@@ -81,7 +81,7 @@ class TestWaitForIt(unittest.TestCase):
            "--help",
            HELP_TEXT,
            "",
-           False
+           True
         )
 
     def test_no_port(self):
