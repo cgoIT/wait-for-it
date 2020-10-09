@@ -11,7 +11,7 @@ bash script, it does not have any external dependencies.
 wait-for-it.sh host:port [-s] [-t timeout] [-- command args]
 -h HOST | --host=HOST       Host or IP under test
 -p PORT | --port=PORT       TCP port under test
-                            Alternatively, you specify the host and port as host:port
+                            Alternatively, you specify the host and port as host:port, multiple parameters allowed
 -s | --strict               Only execute subcommand if the test succeeds
 -q | --quiet                Don't output any status messages
 -t TIMEOUT | --timeout=TIMEOUT
@@ -25,10 +25,12 @@ For example, let's test to see if we can access port 80 on `www.google.com`,
 and if it is available, echo the message `google is up`.
 
 ```text
-$ ./wait-for-it.sh www.google.com:80 -- echo "google is up"
+$ ./wait-for-it.sh www.google.com:80 images.google.com:80 -- echo "both google search and google images are up"
 wait-for-it.sh: waiting 15 seconds for www.google.com:80
 wait-for-it.sh: www.google.com:80 is available after 0 seconds
-google is up
+wait-for-it.sh: waiting 15 seconds for images.google.com:80
+wait-for-it.sh: images.google.com:80 is available after 0 seconds
+both google search and google images are up
 ```
 
 You can set your own timeout with the `-t` or `--timeout=` option.  Setting
