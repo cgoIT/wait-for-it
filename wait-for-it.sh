@@ -67,11 +67,11 @@ wait_for_wrapper()
     # In order to support SIGINT during timeout: http://unix.stackexchange.com/a/57692
     if [[ $WAITFORIT_QUIET -eq 1 ]]; then
         set -x
-        timeout "$WAITFORIT_BUSYTIMEFLAG" "$WAITFORIT_TIMEOUT" "$0" --quiet --child --host="$WAITFORIT_HOST"--port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
+        timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT "$0" --quiet --child --host="$WAITFORIT_HOST"--port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
         set +x
     else
         set -x
-        timeout "$WAITFORIT_BUSYTIMEFLAG" "$WAITFORIT_TIMEOUT" "$0" --child --host="$WAITFORIT_HOST" --port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
+        timeout $WAITFORIT_BUSYTIMEFLAG $WAITFORIT_TIMEOUT "$0" --child --host="$WAITFORIT_HOST" --port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
         set +x
     fi
     WAITFORIT_PID=$!
