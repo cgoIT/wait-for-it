@@ -8,7 +8,7 @@ import sys
 import socket
 import re
 
-MISSING_ARGS_TEXT = "Error: you need to provide a host and port to test."
+MISSING_ARGS_TEXT = "Error: you need to provide at least one host and port to test."
 HELP_TEXT = "Usage:"  # Start of help text
 DIVIDE_LINE = '-'*71  # Output line of dashes
 
@@ -82,8 +82,8 @@ class TestWaitForIt(unittest.TestCase):
         """ Check that help text is printed with --help argument """
         self.check_args(
            "--help",
-           "",
            HELP_TEXT,
+           "",
            False
         )
 
