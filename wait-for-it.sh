@@ -47,7 +47,9 @@ wait_for()
             nc -z "$WAITFORIT_HOST" "$WAITFORIT_PORT"
             WAITFORIT_result=$?
         else
+            set -x
             timeout 1 bash -c "(echo -n > /dev/tcp/$WAITFORIT_HOST/$WAITFORIT_PORT) >/dev/null 2>&1"
+            set +x
             WAITFORIT_result=$?
         fi
         if [[ $WAITFORIT_result -eq 0 ]]; then
@@ -64,9 +66,13 @@ wait_for_wrapper()
 {
     # In order to support SIGINT during timeout: http://unix.stackexchange.com/a/57692
     if [[ $WAITFORIT_QUIET -eq 1 ]]; then
+        set -x
         timeout "$WAITFORIT_BUSYTIMEFLAG" "$WAITFORIT_TIMEOUT" "$0" --quiet --child --host="$WAITFORIT_HOST"--port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
+        set +x
     else
+        set -x
         timeout "$WAITFORIT_BUSYTIMEFLAG" "$WAITFORIT_TIMEOUT" "$0" --child --host="$WAITFORIT_HOST" --port="$WAITFORIT_PORT" --timeout="$WAITFORIT_TIMEOUT" &
+        set +x
     fi
     WAITFORIT_PID=$!
     # shellcheck disable=SC2064
