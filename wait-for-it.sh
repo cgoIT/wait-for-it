@@ -88,7 +88,10 @@ while [[ $# -gt 0 ]]
 do
     case "$1" in
         *:* )
-        WAITFORIT_hostport=("${1//:/ }")
+        IFS=':' read -ra WAITFORIT_hostport <<< "${1}"
+        echo ${WAITFORIT_hostport}
+        echo ${WAITFORIT_hostport[0]}
+        echo ${WAITFORIT_hostport[1]}
         I=$((I + 1))
         WAITFORIT_HOSTS[I]=${WAITFORIT_hostport[0]}
         WAITFORIT_PORTS[I]=${WAITFORIT_hostport[1]}
